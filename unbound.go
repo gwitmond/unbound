@@ -160,12 +160,12 @@ func ParseTLSA(b []byte) TLSA {
 }
 
 // TODO: move this to ecca-lib or elsewhere.
-// GetCACert Gets server certificate from DNSSEC/DANE.
+// GetCACert gets certificate from DNSSEC/DANE.
 func (ctx *UbContext) GetCACert(hostname string) (*x509.Certificate, error) {
 	log.Printf("GetCaCert for %s", hostname)
 	
-	// TODO: make the _443 a parameter of the function; change hostname into host:port
- 	res, err := ctx.Resolve("_443._tcp." + hostname, 52) // 52 is tlsa
+ 	// res, err := ctx.Resolve("_443._tcp." + hostname, 52) // 52 is tlsa
+ 	res, err := ctx.Resolve(hostname, 52) // 52 is tlsa
 	if err != nil {
 		return nil, err
 	}
